@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -8,6 +9,12 @@ const app = express();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: [process.env.PORTFOLIO_URL],
+    methods: 'POST',
+  })
+);
 
 // Route
 app.post("/send-email", (req, res) => {
